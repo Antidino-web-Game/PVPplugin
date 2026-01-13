@@ -1,0 +1,16 @@
+main: fr.antidino.PVPkit
+version: 1.0.1-SNAPSHOT
+name: PVPkit
+author: Antidino
+api-version: 1.13
+commands:
+  addspawn:
+    description: add newspawn
+    usage: /addspawn
+    aliases: [as,adds]
+    permission: PVPkit.spawn
+  listspawn:
+    description: listspawn
+    usage: /listspawn
+    aliases: [ls]
+    permission: PVPkit.spawn

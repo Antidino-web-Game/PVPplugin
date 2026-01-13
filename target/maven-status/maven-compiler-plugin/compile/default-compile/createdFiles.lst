@@ -1,0 +1,13 @@
+fr\antidino\listeners\PlayerListener.class
+fr\antidino\PVPkit.class
+fr\antidino\utils\Eventkill.class
+fr\antidino\utils\HealthDisplay.class
+fr\antidino\listeners\OnFireListener.class
+fr\antidino\managers\PluginManager.class
+fr\antidino\managers\ListenerManager.class
+fr\antidino\utils\Utils.class
+fr\antidino\listeners\onInteract.class
+fr\antidino\commands\addspawnCommand.class
+fr\antidino\commands\listspawnCommand.class
+fr\antidino\utils\Killcounter.class
+fr\antidino\listeners\OnkillListener.class
