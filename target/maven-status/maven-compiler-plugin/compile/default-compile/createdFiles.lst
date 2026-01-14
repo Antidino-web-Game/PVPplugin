@@ -8,6 +8,7 @@ fr\antidino\managers\ListenerManager.class
 fr\antidino\utils\Utils.class
 fr\antidino\listeners\onInteract.class
 fr\antidino\commands\addspawnCommand.class
+fr\antidino\listeners\PlayerChatEventListener.class
 fr\antidino\commands\listspawnCommand.class
 fr\antidino\utils\Killcounter.class
 fr\antidino\listeners\OnkillListener.class

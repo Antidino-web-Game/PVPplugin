@@ -54,7 +54,7 @@ public class PlayerListener implements Listener {
                 event.setCancelled(true);
                 damager.sendMessage(ChatColor.DARK_RED + "Vous ne pouvez pas pvp ici");
             } else {
-                HealthDisplay.showHealthBar(player, damager, event.getFinalDamage());
+                HealthDisplay.showHealthBar(damager, player, event.getFinalDamage());
             }
         }
     }
@@ -89,14 +89,20 @@ public class PlayerListener implements Listener {
     public void onInventoryClick(InventoryClickEvent event) {
         try {
             HumanEntity player = event.getWhoClicked();
-            if (event.getClickedInventory().contains(Material.GOLD_INGOT)) {
-                Location loc = Utils.choseSpawn(plugin, player.getWorld());
-                player.teleport(loc, TeleportCause.NETHER_PORTAL);
-                event.setCancelled(true);
-                Utils.giveStuff(((Player) player));
-                stat.put(player.getUniqueId(), "pvp");
+            try {
+                if (event.getClickedInventory().contains(Material.GOLD_INGOT)) {
+                    Location loc = Utils.choseSpawn(plugin, player.getWorld());
+                    player.teleport(loc, TeleportCause.NETHER_PORTAL);
+                    event.setCancelled(true);
+                    player.setHealth(player.getMaxHealth());
+                    Utils.giveStuff(((Player) player));
+                    stat.put(player.getUniqueId(), "pvp");
 
+                }
+            } catch (Exception e) {
+                Bukkit.getLogger().info("An error is " + e);
             }
+
         } catch (Exception e) {
             Bukkit.getLogger().warning("error : " + e);
         }

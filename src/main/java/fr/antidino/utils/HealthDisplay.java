@@ -3,7 +3,6 @@ package fr.antidino.utils;
 import net.minecraft.server.v1_8_R3.IChatBaseComponent;
 import net.minecraft.server.v1_8_R3.PacketPlayOutChat;
 
-import org.bukkit.Bukkit;
 import org.bukkit.craftbukkit.v1_8_R3.entity.CraftPlayer;
 import org.bukkit.entity.Player;
 
@@ -45,7 +44,6 @@ public class HealthDisplay {
 
         // Position 2 = Action Bar
         PacketPlayOutChat packet = new PacketPlayOutChat(component, (byte) 2);
-        Bukkit.broadcastMessage("dd");
         // Envoi du paquet via la connexion du joueur
         ((CraftPlayer) player).getHandle().playerConnection.sendPacket(packet);
     }
