@@ -9,7 +9,7 @@ import org.bukkit.event.entity.PlayerDeathEvent;
 import org.bukkit.plugin.Plugin;
 
 import fr.antidino.utils.Eventkill;
-import fr.antidino.utils.Killcounter;
+import fr.antidino.utils.PlayerStatues;
 
 import java.util.Random;
 
@@ -26,16 +26,19 @@ public class OnkillListener implements Listener {
         if (event.getEntity().getKiller().getType() != null) {
             if (event.getEntityType() == EntityType.PLAYER
                     && event.getEntity().getKiller().getType() == EntityType.PLAYER) {
-                Player player = ((Player) event.getEntity());
-                Player killer = player.getKiller();
+                if (event.getEntity() != event.getEntity().getKiller()) {
+                    Player player = ((Player) event.getEntity());
+                    Player killer = player.getKiller();
 
-                Bukkit.broadcastMessage("§c" + player.getName() + " | " + killer.getName() + " a "
-                        + Killcounter.killCounter(plugin, killer.getUniqueId()));
-                int number = r.nextInt(100);
-                // event
-                if (number < 20) {
-                    Eventkill.health(killer);
-                } else {
+                    Bukkit.broadcastMessage("§c" + player.getName() + " | " + killer.getName() + " a "
+                            + PlayerStatues.killCounter(plugin, killer.getUniqueId()));
+                    int number = r.nextInt(100);
+                    // event
+                    if (number < 20) {
+                        Eventkill.health(killer);
+                    } else {
+                    }
+
                     if (number < 30) {
                         Eventkill.sword(killer);
 

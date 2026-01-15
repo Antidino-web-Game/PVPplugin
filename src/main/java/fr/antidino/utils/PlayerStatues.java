@@ -7,10 +7,12 @@ import org.bukkit.Bukkit;
 import org.bukkit.configuration.file.YamlConfiguration;
 import org.bukkit.plugin.Plugin;
 
-public class Killcounter {
+import fr.antidino.CustomClass.Variable;
+
+public class PlayerStatues {
     public static int killCounter(Plugin plugin, UUID uuid) {
         int killNumber = 0;
-        File file = Utils.openfile(plugin, "kill");
+        File file = Utils.openfile(plugin, "player");
         YamlConfiguration killFile = YamlConfiguration.loadConfiguration(file);
         if (killFile.contains("" + uuid)) {
             killNumber = killFile.getInt(uuid.toString());
@@ -34,4 +36,17 @@ public class Killcounter {
         return killNumber;
 
     }
+
+    public static void setStatues(Plugin plugin, UUID uuid, String stat, Boolean statues) {
+        File file = Utils.openfile(plugin, "player");
+        Variable variable = new Variable(stat, statues);
+        YamlConfiguration playerStatues = YamlConfiguration.loadConfiguration(file);
+        playerStatues.set(uuid.toString() + variable.getName(), variable.getStat());
+        try {
+            playerStatues.save(file);
+        } catch (Exception e) {
+            Bukkit.getLogger().warning("error when save file " + e);
+        }
+    }
+
 }

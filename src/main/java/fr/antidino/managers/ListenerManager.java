@@ -7,6 +7,7 @@ import fr.antidino.commands.addspawnCommand;
 import fr.antidino.commands.listspawnCommand;
 import fr.antidino.listeners.OnFireListener;
 import fr.antidino.listeners.OnkillListener;
+import fr.antidino.listeners.PlayerChatEventListener;
 import fr.antidino.listeners.PlayerListener;
 import fr.antidino.listeners.onInteract;
 
@@ -17,6 +18,8 @@ public class ListenerManager {
             Bukkit.getServer().getPluginManager().registerEvents(new onInteract(), plugin);
             Bukkit.getServer().getPluginManager().registerEvents(new OnkillListener(plugin), plugin);
             Bukkit.getServer().getPluginManager().registerEvents(new OnFireListener(), plugin);
+            Bukkit.getServer().getPluginManager().registerEvents(new PlayerChatEventListener(), plugin);
+
             Bukkit.getLogger().info("[PVPkits] : Tout les listener ce sont initialise avec succes");
         } catch (Exception e) {
             Bukkit.getLogger().warning("[PVPkits] : Un des listenner ne c'est pas charger " + e);
