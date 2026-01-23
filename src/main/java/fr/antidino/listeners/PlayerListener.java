@@ -26,6 +26,7 @@ import org.bukkit.Material;
 import net.md_5.bungee.api.ChatColor;
 
 import fr.antidino.utils.HealthDisplay;
+import fr.antidino.utils.PlayerStatues;
 import fr.antidino.utils.Utils;
 
 public class PlayerListener implements Listener {
@@ -39,7 +40,7 @@ public class PlayerListener implements Listener {
     @EventHandler(priority = EventPriority.LOW)
     public void onPlayerJoin(PlayerJoinEvent event) {
         Player player = event.getPlayer();
-        stat.put(player.getUniqueId(), "null");
+        PlayerStatues.setStatues(plugin, player.getUniqueId(), "PVP", true);
         player.setGameMode(GameMode.ADVENTURE);
         player.teleport(new Location(player.getWorld(), 10.5, 5, 8.5));
         Utils.giveCompass(player);
@@ -51,7 +52,8 @@ public class PlayerListener implements Listener {
         if (event.getEntityType() == EntityType.PLAYER && event.getDamager().getType() == EntityType.PLAYER) {
             Player player = ((Player) event.getEntity());
             Player damager = ((Player) event.getDamager());
-            if (stat.get(player.getUniqueId()) == "null") {
+            Boolean isPVP = PlayerStatues.getStatues(plugin, event.getDamager().getUniqueId(), "PVP");
+            if (isPVP) {
                 event.setCancelled(true);
                 damager.sendMessage(ChatColor.DARK_RED + "Vous ne pouvez pas pvp ici");
             } else {
@@ -65,7 +67,7 @@ public class PlayerListener implements Listener {
     @EventHandler
     public void onRespawn(PlayerRespawnEvent event) {
         Player player = event.getPlayer();
-        stat.put(player.getUniqueId(), "null");
+        PlayerStatues.setStatues(plugin, event.getPlayer().getUniqueId(), "PVP", true);
         player.setHealth(player.getMaxHealth());
         Bukkit.getLogger().info(player.getName() + " est reapparue");
         Utils.giveCompass(player);
@@ -98,6 +100,7 @@ public class PlayerListener implements Listener {
                     player.teleport(loc, TeleportCause.NETHER_PORTAL);
                     event.setCancelled(true);
                     player.setHealth(player.getMaxHealth());
+                    PlayerStatues.setStatues(plugin, player.getUniqueId(), "PVP", false);
                     Utils.giveStuff(((Player) player));
                     stat.put(player.getUniqueId(), "pvp");
 

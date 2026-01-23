@@ -10,14 +10,18 @@ import org.bukkit.plugin.Plugin;
 import fr.antidino.CustomClass.Variable;
 
 public class PlayerStatues {
+    private static int getNumberKill(YamlConfiguration file, UUID uuid) {
+        return file.getInt(uuid.toString() + ".kill");
+    }
+
     public static int killCounter(Plugin plugin, UUID uuid) {
         int killNumber = 0;
         File file = Utils.openfile(plugin, "player");
         YamlConfiguration killFile = YamlConfiguration.loadConfiguration(file);
         if (killFile.contains("" + uuid)) {
-            killNumber = killFile.getInt(uuid.toString());
-            killFile.set(uuid.toString(), killNumber + 1);
-            killNumber = killFile.getInt(uuid.toString());
+            killNumber = getNumberKill(killFile, uuid);
+            killFile.set(uuid.toString() + ".kill", killNumber + 1);
+            killNumber++;
             try {
             } catch (Exception e) {
                 Bukkit.getLogger().warning("failed to save file " + e);
@@ -41,12 +45,19 @@ public class PlayerStatues {
         File file = Utils.openfile(plugin, "player");
         Variable variable = new Variable(stat, statues);
         YamlConfiguration playerStatues = YamlConfiguration.loadConfiguration(file);
-        playerStatues.set(uuid.toString() + variable.getName(), variable.getStat());
+        playerStatues.set(uuid.toString() + "." + variable.getName(), variable.getStat());
         try {
             playerStatues.save(file);
         } catch (Exception e) {
             Bukkit.getLogger().warning("error when save file " + e);
         }
+    }
+
+    public static boolean getStatues(Plugin plugin, UUID uuid, String name) {
+        File file = Utils.openfile(plugin, "player");
+        YamlConfiguration playerStatues = YamlConfiguration.loadConfiguration(file);
+        return playerStatues.getBoolean(uuid + "." + name);
+
     }
 
 }

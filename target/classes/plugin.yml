@@ -14,3 +14,7 @@ commands:
     usage: /listspawn
     aliases: [ls]
     permission: PVPkit.spawn
+  npc:
+    description: spawn npc
+    usage: /npc
+    permission: PVPkit.npc

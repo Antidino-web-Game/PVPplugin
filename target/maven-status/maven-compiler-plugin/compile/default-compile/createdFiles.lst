@@ -4,11 +4,13 @@ fr\antidino\utils\Eventkill.class
 fr\antidino\utils\HealthDisplay.class
 fr\antidino\listeners\OnFireListener.class
 fr\antidino\managers\PluginManager.class
+fr\antidino\listeners\EntityDamageListener.class
 fr\antidino\managers\ListenerManager.class
+fr\antidino\CustomClass\Variable.class
 fr\antidino\utils\Utils.class
 fr\antidino\listeners\onInteract.class
 fr\antidino\commands\addspawnCommand.class
 fr\antidino\listeners\PlayerChatEventListener.class
 fr\antidino\commands\listspawnCommand.class
-fr\antidino\utils\Killcounter.class
+fr\antidino\utils\PlayerStatues.class
 fr\antidino\listeners\OnkillListener.class
